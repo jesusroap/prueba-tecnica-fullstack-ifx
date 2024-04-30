@@ -34,7 +34,7 @@ type User = {
 }
 
 type Name = {
-  firstname: any
+  firstname: string
   lastname: string
 }
 
@@ -84,7 +84,7 @@ export default function UserPage() {
 
   const [selected, setSelected] = useState([]);
 
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState('name.firstname');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -134,7 +134,8 @@ export default function UserPage() {
   );
   columnsName.push({ id: '' })
 
-  const handleSort = (id: any) => {
+  const handleSort = (event:any, id: any) => {
+    console.log(event)
     const isAsc = orderBy === id && order === 'asc';
     if (id !== '') {
       setOrder(isAsc ? 'desc' : 'asc');
@@ -144,14 +145,15 @@ export default function UserPage() {
 
   const handleSelectAllClick = (event: any) => {
     if (event.target.checked) {
-      const newSelecteds: any = data.map((n: any) => n.name);
+      const newSelecteds: any = data.map((n: User) => n.id);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (name: never) => {
+  const handleClick = (event:any, name: never) => {
+    console.log(event)
     const selectedIndex = selected.indexOf(name);
     let newSelected: any = [];
     if (selectedIndex === -1) {
@@ -169,7 +171,8 @@ export default function UserPage() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (newPage: any) => {
+  const handleChangePage = (event:any, newPage: any) => {
+    console.log(event)
     setPage(newPage);
   };
 
@@ -246,8 +249,8 @@ export default function UserPage() {
                       key={row.id}
                       rowData={row}
                       newUser={ newUser }
-                      selected={selected.indexOf(row.original.name.firstname as never) !== -1}
-                      handleClick={() => handleClick(row.original.name.firstname as never)}
+                      selected={selected.indexOf(row.original.id as never) !== -1}
+                      handleClick={(e) => handleClick(e, row.original.id as never)}
                     />
                   ))
                 }

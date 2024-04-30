@@ -4,12 +4,10 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import { useTheme } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 
 import { useResponsive } from '../../hooks/use-responsive';
-
-import { bgBlur } from '../../theme/css';
 
 import Iconify from '../../components/iconify';
 
@@ -52,9 +50,9 @@ export default function Header({ onOpenNav }: any) {
         boxShadow: 'none',
         height: HEADER.H_MOBILE,
         zIndex: theme.zIndex.appBar + 1,
-        ...bgBlur({
-          color: theme.palette.background.default,
-        }),
+        backdropFilter: 'blur(6px)',
+        WebkitBackdropFilter: 'blur(6px)',
+        backgroundColor: alpha(theme.palette.background.default, 0.8),
         transition: theme.transitions.create(['height'], {
           duration: theme.transitions.duration.shorter,
         }),

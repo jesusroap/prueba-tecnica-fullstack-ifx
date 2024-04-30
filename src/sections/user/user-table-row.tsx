@@ -19,17 +19,20 @@ export default function UserTableRow({
   handleClick,
   newUser
 }: any) {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [dataUser, setDataUser] = useState({ firstname: '', lastname: '', id: 0 })
   const [context, setContext] = useState("")
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleOpenMenu = (event: any) => {
-    setOpen(event.currentTarget);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleCloseMenu = () => {
-    setOpen(false);
+    setAnchorEl(null);
   };
+
+  const open = Boolean(anchorEl);
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -48,7 +51,7 @@ export default function UserTableRow({
   };
   const handleCloseModal = () => {
     setOpenModal(false)
-    setOpen(false)
+    setAnchorEl(null)
   };
 
   const deleteUser = (data: any, context: string) => {
@@ -58,7 +61,7 @@ export default function UserTableRow({
       .then((response) => response.json())
       .then((data: any) => {
         newUser(data, context)
-        setOpen(false)
+        setAnchorEl(null)
         console.log("ELiminación Exitosa", data)
       })
       .catch((error) => console.log(error));
@@ -90,7 +93,7 @@ export default function UserTableRow({
 
       <Popover
         open={!!open}
-        anchorEl={open}
+        anchorEl={anchorEl}
         onClose={handleCloseMenu}
         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -98,7 +101,7 @@ export default function UserTableRow({
           sx: { width: 140 },
         }}
       >
-        <MenuItem onClick={(e: any) => handleOpenModal(rowData.original)}>
+        <MenuItem onClick={() => handleOpenModal(rowData.original)}>
           <Iconify icon="eva:edit-fill" sx={{ mr: 2 }} />
           Edit
         </MenuItem>
@@ -118,4 +121,5 @@ UserTableRow.propTypes = {
   handleClick: PropTypes.func,
   rowData: PropTypes.any,
   selected: PropTypes.any,
+  newUser: PropTypes.any
 };

@@ -19,7 +19,7 @@ import UserTableHead from './user-table-head';
 import TableEmptyRows from './table-empty-rows';
 import UserTableToolbar from './user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from './utils';
-import { createColumnHelper, getCoreRowModel, getFilteredRowModel, useReactTable } from '@tanstack/react-table';
+import { createColumnHelper, getCoreRowModel, getFilteredRowModel, Row, useReactTable } from '@tanstack/react-table';
 import ModalUser from './modal-user';
 
 // ----------------------------------------------------------------------
@@ -34,7 +34,7 @@ type User = {
 }
 
 type Name = {
-  firstname: string
+  firstname: any
   lastname: string
 }
 
@@ -134,7 +134,7 @@ export default function UserPage() {
   );
   columnsName.push({ id: '' })
 
-  const handleSort = (event: any, id: any) => {
+  const handleSort = (id: any) => {
     const isAsc = orderBy === id && order === 'asc';
     if (id !== '') {
       setOrder(isAsc ? 'desc' : 'asc');
@@ -151,7 +151,7 @@ export default function UserPage() {
     setSelected([]);
   };
 
-  const handleClick = (event: any, name: never) => {
+  const handleClick = (name: never) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected: any = [];
     if (selectedIndex === -1) {
@@ -169,7 +169,7 @@ export default function UserPage() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event: any, newPage: any) => {
+  const handleChangePage = (newPage: any) => {
     setPage(newPage);
   };
 
@@ -240,25 +240,14 @@ export default function UserPage() {
                 headLabel={columnsName}
               />
               <TableBody>
-                {/* {dataFiltered
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row: any) => (
-                    <UserTableRow
-                      key={row.id}
-                      rowData={row}
-                      selected={selected.indexOf(row.name.firstname) !== -1}
-                      handleClick={(event: any) => handleClick(event, row.name.firstname)}
-                    />
-                  ))} */}
-
                 {
-                  table.getRowModel().rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: any) => (
+                  table.getRowModel().rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: Row<User>) => (
                     <UserTableRow
                       key={row.id}
                       rowData={row}
                       newUser={ newUser }
-                      selected={selected.indexOf(row.id) !== -1}
-                      handleClick={(event: any) => handleClick(event, row.id)}
+                      selected={selected.indexOf(row.original.name.firstname as never) !== -1}
+                      handleClick={() => handleClick(row.original.name.firstname as never)}
                     />
                   ))
                 }

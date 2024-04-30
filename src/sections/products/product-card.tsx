@@ -8,27 +8,26 @@ import Typography from '@mui/material/Typography';
 
 import { fCurrency } from '../../utils/format-number';
 
-import Label from '../../components/label/label';
-import { ColorPreview } from '../../components/color-utils';
+// import Label from '../../components/label/label';
 
 // ----------------------------------------------------------------------
 
 export default function ShopProductCard({ product }: any) {
-  const renderStatus = (
-    <Label
-      variant="filled"
-      color={(product.status === 'sale' && 'error') || 'info'}
-      sx={{
-        zIndex: 9,
-        top: 16,
-        right: 16,
-        position: 'absolute',
-        textTransform: 'uppercase',
-      }}
-    >
-      {product.status}
-    </Label>
-  );
+  // const renderStatus = (
+  //   <Label
+  //     variant="filled"
+  //     color={(product.status === 'sale' && 'error') || 'info'}
+  //     sx={{
+  //       zIndex: 9,
+  //       top: 16,
+  //       right: 16,
+  //       position: 'absolute',
+  //       textTransform: 'uppercase',
+  //     }}
+  //   >
+  //     {product.status}
+  //   </Label>
+  // );
 
   const renderImg = (
     <Box

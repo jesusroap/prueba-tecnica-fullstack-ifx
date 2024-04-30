@@ -77,7 +77,7 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
         name="colors"
         selected={[]}
         colors={COLOR_OPTIONS}
-        onSelectColor={(color: any) => [].includes(color)}
+        onSelectColor={(color: never) => [].includes(color)}
         sx={{ maxWidth: 38 * 4 }}
       />
     </Stack>

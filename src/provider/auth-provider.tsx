@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
-const AuthContext = createContext();
+const AuthContext: any = createContext({});
 
 const AuthProvider = ({ children }: any) => {
   // State to hold the authentication token
@@ -35,7 +35,7 @@ const AuthProvider = ({ children }: any) => {
 };
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+  return useContext<any>(AuthContext);
 };
 
 export default AuthProvider;

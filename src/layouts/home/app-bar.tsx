@@ -4,8 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import AppBar from '@mui/material/AppBar';
 import { HEADER } from "../dashboard/config-layout";
-import { useTheme } from "@mui/material/styles";
-import { bgBlur } from "../../theme/css";
+import { alpha, useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
@@ -22,7 +21,7 @@ export default function AppBarHome() {
 
     const [action, setAction] = useState({ name: '', link: '' })
 
-    const pages = [{ name: 'Docs', url: 'https://github.com/jesusroap/prueba-tecnica-fullstack-ifx#funcionamiento-de-la-aplicacion', id: 1 }];
+    const pages = [{ name: 'Docs', url: 'https://github.com/jesusroap/prueba-tecnica-fullstack-ifx#funcionamiento-de-la-aplicación', id: 1 }];
 
     const navigator = (url: string) => {
         location.href=url
@@ -54,9 +53,9 @@ export default function AppBarHome() {
                     boxShadow: 'none',
                     height: HEADER.H_MOBILE,
                     zIndex: theme.zIndex.appBar + 1,
-                    ...bgBlur({
-                        color: theme.palette.background.default,
-                    }),
+                    backdropFilter: 'blur(6px)',
+                    WebkitBackdropFilter: 'blur(6px)',
+                    backgroundColor: alpha(theme.palette.background.default, 0.8),
                     transition: theme.transitions.create(['height'], {
                         duration: theme.transitions.duration.shorter,
                     }),

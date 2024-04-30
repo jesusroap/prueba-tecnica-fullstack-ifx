@@ -5,7 +5,7 @@ import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
 
-const StyledRoot = styled('div')(({ theme }) => ({
+const StyledRoot = styled('div')(({ theme }: any) => ({
   zIndex: 999,
   right: 0,
   display: 'flex',

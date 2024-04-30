@@ -1,12 +1,16 @@
-// import { useState } from 'react'
 import './styles/App.css'
-import LoginPage from './pages/login.tsx'
+
+import Routes from './routes/sections';
+import ThemeProvider from './theme';
+import AuthProvider from './provider/auth-provider';
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
-    <LoginPage />
+    <ThemeProvider>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
+    </ThemeProvider>
   )
 }
 

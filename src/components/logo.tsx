@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import { useTheme } from '@mui/material/styles';
 
-// import { RouterLink } from 'src/routes/components';
+import RouterLink from '../routes/components/router-link';
 
 // ----------------------------------------------------------------------
 
@@ -80,11 +80,11 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }: any, ref) => {
     return logo;
   }
 
-  // return (
-  //   <Link component={RouterLink} href="/" sx={{ display: 'contents' }}>
-  //     {logo}
-  //   </Link>
-  // );
+  return (
+    <Link component={RouterLink} href="/" sx={{ display: 'contents' }}>
+      {logo}
+    </Link>
+  );
 });
 
 Logo.propTypes = {

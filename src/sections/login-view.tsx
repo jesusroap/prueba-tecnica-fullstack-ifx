@@ -1,74 +1,109 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { LoginSchema } from '../components/validation/login-schema.tsx'
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
-import Button from '@mui/material/Button';
+
 import { alpha, useTheme } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
+
+import {
+    Box,
+    Button,
+    Typography,
+    Stack,
+    Card,
+    Link,
+    Divider,
+    InputAdornment,
+    IconButton
+} from '@mui/material';
+
+import LoadingButton from '@mui/lab/LoadingButton';
 
 import { bgGradient } from '../theme/css';
 import Logo from '../components/logo.tsx';
 import Iconify from '../components/iconify.tsx';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import { useState } from 'react';
-import LoadingButton from '@mui/lab/LoadingButton';
 
-const styles = {
-    label: 'block text-sm font-bold pt-2 pb-1',
-    field: 'bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none',
-    button: 'bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600',
-    errorMsg: 'text-red-500 text-sm',
-}
+import { TextField } from 'formik-mui';
+import { useState } from 'react';
+
+import { decodeToken } from 'react-jwt';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginView = () => {
     const theme = useTheme();
 
+    const navigate = useNavigate();
+
+    const [errors, setErrors] = useState("")
+
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleClick = () => {
-        // router.push('/dashboard');
-    };
+    const decodeJWT = (token: string) => {
+        const decodedJWT: any = decodeToken(token);
+        fetch("https://fakestoreapi.com/users/" + decodedJWT.sub)
+            .then((response) => response.json())
+            .then((data: any) => {
+                const newData = {
+                    firstname: data.name.firstname,
+                    lastname: data.name.lastname,
+                    email: data.email
+                }
+                localStorage.setItem("user", JSON.stringify(newData))
+            })
+            .catch((error: any) => console.log(error));
+    }
+
+    const postData = (username: string, password: string) => {
+        fetch("https://fakestoreapi.com/auth/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "username": username,
+                "password": password
+            })
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    // console.log(response)
+                    setErrors('username or password is incorrect')
+                    throw new Error(`Error ${response.status}: username or password is incorrect`);
+                }
+                return response.json()
+            })
+            .then((data: any) => {
+                localStorage.setItem("token", data.token)
+                decodeJWT(data.token)
+                navigate('/admin/users', {replace: true});
+            })
+            .catch((error) => {
+                return console.error(error)
+            });
+    }
 
     const renderForm = (
         <>
             <Formik
-                initialValues={{ email: '', password: '' }}
+                initialValues={{ username: '', password: '' }}
                 validationSchema={LoginSchema}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
-                        console.log(values)
+                        // console.log(values)
+                        setErrors('')
+                        postData(values.username, values.password)
                         setSubmitting(false);
                     }, 400);
                 }}
             >
                 {({ isSubmitting }) => (
                     <Form>
-                        {/* <label className={styles.label} htmlFor="email">Email</label>
-                        <Field className={styles.field} id="email" type="email" name="email" />
-                        <ErrorMessage className={styles.errorMsg} name="email" component="div" />
-
-                        <label className={styles.label} htmlFor="password">Password</label>
-                        <Field className={styles.field} id="password" type="password" name="password" />
-                        <ErrorMessage className={styles.errorMsg} name="password" component="div" />
-
-                        <div className='mt-8'>
-                            <button className={styles.button} type="submit" disabled={isSubmitting}>
-                                Submit
-                            </button>
-                        </div> */}
-
                         <Stack spacing={3}>
-                            <TextField name="email" label="Email address" />
+                            <Field id="username" type="text" name="username" label="Username" component={TextField} />
 
-                            <TextField
+                            <Field
                                 name="password"
                                 label="Password"
                                 type={showPassword ? 'text' : 'password'}
+                                component={TextField}
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">
@@ -93,6 +128,7 @@ export const LoginView = () => {
                             type="submit"
                             variant="contained"
                             color="inherit"
+                            disabled={isSubmitting}
                         >
                             Login
                         </LoadingButton>
@@ -128,7 +164,7 @@ export const LoginView = () => {
                         maxWidth: 420,
                     }}
                 >
-                    <Typography variant="h4">Sign in to Minimal</Typography>
+                    <Typography variant="h4">Sign in</Typography>
 
                     <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
                         Don’t have an account?
@@ -174,6 +210,10 @@ export const LoginView = () => {
                             OR
                         </Typography>
                     </Divider>
+
+                    <Typography variant="body2" sx={{ color: '#FF5630', marginBottom: '1rem' }}>
+                        { errors }
+                    </Typography>
 
                     {renderForm}
                 </Card>

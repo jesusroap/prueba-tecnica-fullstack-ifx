@@ -8,7 +8,7 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title> Login | Products App </title>
+        <title> Login | Store App </title>
       </Helmet>
 
       <LoginView />

@@ -1,30 +1,25 @@
-# React + TypeScript + Vite
+# Store App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta aplicación fue creada con Vite y React para simular una tienda virtual. Los datos se recuperan de [Fake Store API](https://fakestoreapi.com/)
 
-Currently, two official plugins are available:
+## Instalación de la Aplicación
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Correr `npm i` para instalar las dependencias necesarias.
 
-## Expanding the ESLint configuration
+## Ejecución de la Aplicación
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Correr `npm run dev` para ejecutar la aplicacion en `http://127.0.0.1:5173/`
 
-- Configure the top-level `parserOptions` property like this:
+## Funcionamiento de la Aplicación
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Para ingresar al modulo de administración,  dirigirse al boton de login situado en la esquina superior de la página principal, ingrese username `mor_2314` y password `83r5^_` .
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+En el modulo de administración podra consultar los usuarios y productos ingresando por las opciones del menu lateral.
+
+Ingresando a la opción de usuarios `Users` podra filtrar los usuarios con ayuda de la barra de busqueda situada encima de la tabla, actualizar y eliminar usuarios con la ayuda del boton de acción situado al final de cada fila de la tabla y crear nuevos registros de usuarios con la ayuda del boton nuevo usuario `New User` situado en la esquina derecha superior.
+
+Ingresando a la opción de productos `Products` solo podra visualizar el listado de productos.
+
+Podra navegar al home desde el modulo de administracion dando click en el icono situado en la esquina izquierda superior, y podra volver desde la pagina principal hasta el modulo de administracion dando click en el boton `Dashboard`.
+
+Finalmente podra cerrar sesión dirigiendose al avatar ubicado en la esquina superior derecha en la opción cerrar sesión `Logout`.

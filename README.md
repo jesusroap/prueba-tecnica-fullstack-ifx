@@ -23,3 +23,16 @@ Ingresando a la opción de productos `Products` solo podra visualizar el listado
 Podra navegar al home desde el modulo de administracion dando click en el icono situado en la esquina izquierda superior, y podra volver desde la pagina principal hasta el modulo de administracion dando click en el boton `Dashboard`.
 
 Finalmente podra cerrar sesión dirigiendose al avatar ubicado en la esquina superior derecha en la opción cerrar sesión `Logout`.
+
+## Demo
+
+- [Netlify](https://tourmaline-daffodil-faa95d.netlify.app/)
+- [Render](https://prueba-tecnica-fullstack-ifx.onrender.com/)
+
+## Preview
+
+![Home](https://github.com/jesusroap/prueba-tecnica-fullstack-ifx/blob/master/public/assets/images/preview/home.png?raw=true "Home")
+
+![Users](https://github.com/jesusroap/prueba-tecnica-fullstack-ifx/blob/master/public/assets/images/preview/users.png?raw=true "Users")
+
+![Products](https://github.com/jesusroap/prueba-tecnica-fullstack-ifx/blob/master/public/assets/images/preview/products.png?raw=true "Products")

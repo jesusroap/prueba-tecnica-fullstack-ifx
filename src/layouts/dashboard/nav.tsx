@@ -14,8 +14,6 @@ import RouterLink from '../../routes/components/router-link.tsx';
 
 import { useResponsive } from '../../hooks/use-responsive';
 
-import { account } from '../../_mock/account';
-
 import Logo from '../../components/logo';
 import Scrollbar from '../../components/scrollbar/scrollbar.tsx';
 
@@ -64,7 +62,7 @@ export default function Nav({ openNav, onCloseNav }: any) {
         bgcolor: (theme) => alpha(theme.palette.grey[500], 0.12),
       }}
     >
-      <Avatar src={account.photoURL} alt="photoURL" />
+      <Avatar src={'/assets/images/avatars/avatar_25.jpg'} alt="photoURL" />
 
       <Box sx={{ ml: 2 }}>
         <Typography variant="subtitle2">{user.firstname + ' ' + user.lastname}</Typography>

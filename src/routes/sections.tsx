@@ -85,23 +85,3 @@ const Routes = () => {
 };
 
 export default Routes;
-
-// import { Navigate, Routes, Route } from 'react-router-dom';
-
-// import { PrivateRoutes } from './private-routes';
-// import { PublicRoutes } from './public-routes';
-
-// // ----------------------------------------------------------------------
-
-// export default function Router() {
-//   return (
-//     <Routes>
-//       {
-//         localStorage.getItem('token')
-//           ? <Route path="/*" element={<PrivateRoutes />} />
-//           : <Route path="/*" element={<PublicRoutes />} />
-//       }
-//       <Route path='*' element={<Navigate to='/' replace />} />
-//     </Routes>
-//   );
-// }

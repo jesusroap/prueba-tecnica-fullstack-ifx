@@ -10,6 +10,9 @@ import IconButton from '@mui/material/IconButton';
 
 import Iconify from '../../components/iconify';
 import ModalUser from './modal-user';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 // ----------------------------------------------------------------------
 
@@ -74,9 +77,22 @@ export default function UserTableRow({
           <Checkbox disableRipple checked={selected} onChange={handleClick} />
         </TableCell>
 
-        {rowData.getVisibleCells().map((cell: any) => (
-          <TableCell key={cell.id}>{cell.getValue()}</TableCell>
-        ))}
+        <TableCell key={rowData.original.id} component="th" scope="row" padding="none">
+          <Stack direction="row" alignItems="center" spacing={2}>
+            <Avatar alt={rowData.original.name.firstname} src={'/assets/images/avatars/avatar_' + rowData.original.id + '.jpg'} />
+            <Typography variant="subtitle2" noWrap>
+              {rowData.original.name.firstname}
+            </Typography>
+          </Stack>
+        </TableCell>
+
+        <TableCell>{rowData.original.name.lastname}</TableCell>
+
+        <TableCell>{rowData.original.email}</TableCell>
+
+        <TableCell>{rowData.original.phone}</TableCell>
+
+        <TableCell>{rowData.original.address.city}</TableCell>
 
         {/* <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell> */}
 
